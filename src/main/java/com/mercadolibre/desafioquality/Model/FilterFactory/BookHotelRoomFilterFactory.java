@@ -28,7 +28,7 @@ public class BookHotelRoomFilterFactory {
 
 
         //Solo deberíamos analizar el caso que ingresen fecha de salida y entrada
-        if (request.getBookingDTO().getDateTo()!= null && request.getBookingDTO().getDateFrom()!= null)
+        /*if (request.getBookingDTO().getDateTo()!= null && request.getBookingDTO().getDateFrom()!= null)
         {
             if(request.getBookingDTO().getDateFrom().before(request.getBookingDTO().getDateTo() ) )
             {
@@ -39,6 +39,7 @@ public class BookHotelRoomFilterFactory {
 
             }
         }
+        */
 
         if(request.getBookingDTO().getHotelCode()!= null ) {
             allPredicates.add( p -> p.getCode().equalsIgnoreCase(request.getBookingDTO().getHotelCode().toLowerCase(Locale.ROOT)));

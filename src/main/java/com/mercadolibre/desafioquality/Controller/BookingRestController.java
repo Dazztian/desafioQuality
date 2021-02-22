@@ -21,7 +21,6 @@ public class BookingRestController {
     @GetMapping("/booking")
     public BookHotelRoomResponseDTO BookHotelRoom(@RequestBody BookHotelRoomRequestDTO request)
     {
-        BookHotelRoomRequestDTO unarequest =request;
         return bookingService.bookHotel(request);
     }
 
