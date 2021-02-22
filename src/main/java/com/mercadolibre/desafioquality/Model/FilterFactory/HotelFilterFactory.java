@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.Model;
+package com.mercadolibre.desafioquality.Model.FilterFactory;
 
 import com.mercadolibre.desafioquality.DTO.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.RequestDTO;

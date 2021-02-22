@@ -11,22 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/hotels")
+@RequestMapping("/api/v1")
 public class BookingRestController {
 
 
     @Autowired
     BookingServiceImpl bookingService;
 
-    //@GetMapping("/booking")
-    /*@GetMapping()
-    public BookHotelRoomResponseDTO getAllAvailableHotelRooms(BookHotelRoomRequestDTO request)
+    @GetMapping("/booking")
+    public BookHotelRoomResponseDTO BookHotelRoom(@RequestBody BookHotelRoomRequestDTO request)
     {
+        BookHotelRoomRequestDTO unarequest =request;
         return bookingService.bookHotel(request);
-    }*/
+    }
 
-    @GetMapping()
-    public ResponseDTO BookHotelRoom(RequestDTO request)
+    @GetMapping("/hotels")
+    public ResponseDTO getAllAvailableHotelRooms(RequestDTO request)
     {
         return bookingService.getAllAvailableHotels(request);
     }
