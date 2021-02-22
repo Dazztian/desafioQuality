@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO;
+package com.mercadolibre.desafioquality.DTO.AvailabilityDTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

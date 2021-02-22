@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO;
+package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
 public class PeopleDTO {
 

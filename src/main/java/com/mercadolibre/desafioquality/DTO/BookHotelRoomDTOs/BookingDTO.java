@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO;
+package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

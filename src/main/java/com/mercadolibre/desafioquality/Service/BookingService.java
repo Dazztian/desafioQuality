@@ -1,6 +1,10 @@
 package com.mercadolibre.desafioquality.Service;
 
-import com.mercadolibre.desafioquality.DTO.*;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.RequestDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 
 import java.text.ParseException;
 import java.util.List;

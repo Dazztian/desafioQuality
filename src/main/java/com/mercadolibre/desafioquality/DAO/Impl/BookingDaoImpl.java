@@ -3,7 +3,7 @@ package com.mercadolibre.desafioquality.DAO.Impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafioquality.DAO.BookingDao;
-import com.mercadolibre.desafioquality.DTO.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 

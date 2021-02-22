@@ -1,7 +1,4 @@
-package com.mercadolibre.desafioquality.DTO;
-
-import java.util.Date;
-import java.util.List;
+package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
 public class BookHotelRoomResponseDTO {
 

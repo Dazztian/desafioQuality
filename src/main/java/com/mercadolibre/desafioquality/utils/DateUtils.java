@@ -1,6 +1,6 @@
 package com.mercadolibre.desafioquality.utils;
 
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 
 import java.util.Date;
 

@@ -1,7 +1,12 @@
 package com.mercadolibre.desafioquality.Service.impl;
 
 import com.mercadolibre.desafioquality.DAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.*;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.RequestDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
 import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilterFactory;
 import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
