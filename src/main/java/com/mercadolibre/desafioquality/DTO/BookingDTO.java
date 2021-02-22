@@ -2,12 +2,16 @@ package com.mercadolibre.desafioquality.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
+
 
 public class BookingDTO {
 
 
+
+    @Past
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -16,19 +20,19 @@ public class BookingDTO {
     private String hotelCode;
     private Integer peopleAmount;
     private String roomType;
-    private List<PeopleDTO> peopleList;
+    private List<PeopleDTO>  people;
 
     public BookingDTO() {
     }
 
-    public BookingDTO(Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> peopleList) {
+    public BookingDTO(Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> people) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.destination = destination;
         this.hotelCode = hotelCode;
         this.peopleAmount = peopleAmount;
         this.roomType = roomType;
-        this.peopleList = peopleList;
+        this.people = people;
     }
 
     public Date getDateFrom() {
@@ -79,11 +83,11 @@ public class BookingDTO {
         this.roomType = roomType;
     }
 
-    public List<PeopleDTO> getPeopleList() {
-        return peopleList;
+    public List<PeopleDTO> getPeople() {
+        return people;
     }
 
-    public void setPeopleList(List<PeopleDTO> peopleList) {
-        this.peopleList = peopleList;
+    public void setPeople(List<PeopleDTO> people) {
+        this.people = people;
     }
 }

@@ -51,9 +51,6 @@ public class BookHotelRoomFilterFactory {
         }
 
 
-        //Debería agregar un filter que compare el peopleAmount con la cantidad de people que mando en la lista
-
-
         //Siempre checkeamos que no esté ocupada
         allPredicates.add( p -> p.getOcuppied() == false );
 

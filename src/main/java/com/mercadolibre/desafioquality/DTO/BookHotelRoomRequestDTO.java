@@ -1,8 +1,11 @@
 package com.mercadolibre.desafioquality.DTO;
 
+import javax.validation.Valid;
+
 public class BookHotelRoomRequestDTO {
 
     private String username;
+    @Valid
     private BookingDTO bookingDTO;
     private PaymentMethodDTO paymentMethodDTO;
 

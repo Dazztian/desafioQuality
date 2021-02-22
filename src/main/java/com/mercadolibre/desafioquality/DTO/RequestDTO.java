@@ -1,7 +1,6 @@
 package com.mercadolibre.desafioquality.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mercadolibre.desafioquality.utils.DateFormatter;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -15,7 +14,9 @@ public class RequestDTO {
     //Me levanta los datos con el formato mm/dd/yyyy
     //Esto tengo que hacerle un refactor para que levante de la forma dd/mm/yyyy
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Optional<Date> dateFrom;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Optional<Date> dateTo;
     private Optional<String> destination;
 

@@ -7,9 +7,10 @@ import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.BookRequestValidation;
 import com.mercadolibre.desafioquality.Service.BookingService;
+import com.mercadolibre.desafioquality.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -120,12 +121,14 @@ public class BookingServiceImpl implements BookingService {
             else //Si llegaste hasta acá es el camino feliz
             {
                 Double price = Double.valueOf(hotelsFiltered.get(0).getPrice().toString()) ;
-                Double interest = 1.0;
+                Double interest = responseDTO.getInterest();
+                Double amount =price * DateUtils.getDaysDifference(responseDTO);
 
-                responseDTO.setAmount(price);
+                responseDTO.setAmount(amount);
                 responseDTO.setInterest(interest);
-                responseDTO.setTotal(price * interest);
+                responseDTO.setTotal(amount * interest);
             }
         }
     }
+
 }

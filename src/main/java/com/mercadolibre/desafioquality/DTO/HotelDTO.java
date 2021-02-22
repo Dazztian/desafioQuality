@@ -1,11 +1,9 @@
 package com.mercadolibre.desafioquality.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mercadolibre.desafioquality.utils.DateFormatter;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Optional;
 
 public class HotelDTO {
 
@@ -14,10 +12,9 @@ public class HotelDTO {
     private String destination;
     private String roomType;
     private Integer price;
-    //Así levanta la fecha correctamente
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")//"dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date disponibilityFrom;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")//"dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date disponibilityUntil;
     private Boolean ocuppied;
 
@@ -27,8 +24,8 @@ public class HotelDTO {
         this.destination = destination;
         this.roomType = roomType;
         this.price = price;
-        this.disponibilityFrom = disponibilityFrom;//DateFormatter.dateFormatter(Optional.of(disponibilityFrom));//disponibilityFrom;
-        this.disponibilityUntil = disponibilityUntil;// DateFormatter.dateFormatter(Optional.of(disponibilityUntil));
+        this.disponibilityFrom = disponibilityFrom;
+        this.disponibilityUntil = disponibilityUntil;
         this.ocuppied = ocuppied;
     }
 
