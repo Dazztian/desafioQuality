@@ -2,7 +2,6 @@ package com.mercadolibre.desafioquality.Model.FilterFactory;
 
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.HotelDTO;
-import com.mercadolibre.desafioquality.DTO.RequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,26 +27,26 @@ public class BookHotelRoomFilterFactory {
 
 
         //Solo deberíamos analizar el caso que ingresen fecha de salida y entrada
-        if (request.getBookingDTO().getDateTo()!= null && request.getBookingDTO().getDateFrom()!= null)
+        if (request.getBooking().getDateTo()!= null && request.getBooking().getDateFrom()!= null)
         {
-            if(request.getBookingDTO().getDateFrom().before(request.getBookingDTO().getDateTo() ) )
+            if(request.getBooking().getDateFrom().before(request.getBooking().getDateTo() ) )
             {
-                allPredicates.add( p -> p.getDisponibilityFrom().compareTo(request.getBookingDTO().getDateFrom()) <= 0);
-                allPredicates.add( p -> p.getDisponibilityUntil().compareTo(request.getBookingDTO().getDateTo()) >= 0);
+                allPredicates.add( p -> p.getDisponibilityFrom().compareTo(request.getBooking().getDateFrom()) <= 0);
+                allPredicates.add( p -> p.getDisponibilityUntil().compareTo(request.getBooking().getDateTo()) >= 0);
             }
         }
 
 
-        if(request.getBookingDTO().getHotelCode()!= null ) {
-            allPredicates.add( p -> p.getCode().equalsIgnoreCase(request.getBookingDTO().getHotelCode().toLowerCase(Locale.ROOT)));
+        if(request.getBooking().getHotelCode()!= null ) {
+            allPredicates.add( p -> p.getCode().equalsIgnoreCase(request.getBooking().getHotelCode().toLowerCase(Locale.ROOT)));
         }
 
-        if(request.getBookingDTO().getRoomType()!= null ) {
-            allPredicates.add( p -> p.getRoomType().equalsIgnoreCase(request.getBookingDTO().getRoomType().toLowerCase(Locale.ROOT)));
+        if(request.getBooking().getRoomType()!= null ) {
+            allPredicates.add( p -> p.getRoomType().equalsIgnoreCase(request.getBooking().getRoomType().toLowerCase(Locale.ROOT)));
         }
 
-        if(request.getBookingDTO().getDestination()!= null ) {
-            allPredicates.add( p -> p.getDestination().equalsIgnoreCase(request.getBookingDTO().getDestination().toLowerCase(Locale.ROOT)));
+        if(request.getBooking().getDestination()!= null ) {
+            allPredicates.add( p -> p.getDestination().equalsIgnoreCase(request.getBooking().getDestination().toLowerCase(Locale.ROOT)));
         }
 
 

@@ -5,15 +5,15 @@ public class PeopleDTO {
     private String dni;
     private String name;
     private String lastname;
-    private String birthdate;
-    private String email;
+    private String birthDate;
+    private String mail;
 
-    public PeopleDTO(String dni, String name, String lastname, String birthdate, String email) {
+    public PeopleDTO(String dni, String name, String lastname, String birthDate, String mail) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.birthdate = birthdate;
-        this.email = email;
+        this.birthDate = birthDate;
+        this.mail = mail;
     }
 
     public String getDni() {
@@ -40,19 +40,19 @@ public class PeopleDTO {
         this.lastname = lastname;
     }
 
-    public String getBirthdate() {
-        return birthdate;
+    public String getbirthDate() {
+        return birthDate;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
+    public void setbirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public String getEmail() {
-        return email;
+    public String getmail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setmail(String mail) {
+        this.mail = mail;
     }
 }

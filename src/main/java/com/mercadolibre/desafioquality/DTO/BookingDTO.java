@@ -21,11 +21,12 @@ public class BookingDTO {
     private Integer peopleAmount;
     private String roomType;
     private List<PeopleDTO>  people;
+    private PaymentMethodDTO paymentMethod;
 
     public BookingDTO() {
     }
 
-    public BookingDTO(Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> people) {
+    public BookingDTO(@Past Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> people, PaymentMethodDTO paymentMethod) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.destination = destination;
@@ -33,6 +34,7 @@ public class BookingDTO {
         this.peopleAmount = peopleAmount;
         this.roomType = roomType;
         this.people = people;
+        this.paymentMethod = paymentMethod;
     }
 
     public Date getDateFrom() {
@@ -89,5 +91,13 @@ public class BookingDTO {
 
     public void setPeople(List<PeopleDTO> people) {
         this.people = people;
+    }
+
+    public PaymentMethodDTO getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethodDTO paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

@@ -6,13 +6,11 @@ public class BookHotelRoomRequestDTO {
 
     private String username;
     @Valid
-    private BookingDTO bookingDTO;
-    private PaymentMethodDTO paymentMethodDTO;
+    private BookingDTO booking;
 
-    public BookHotelRoomRequestDTO(String username, BookingDTO bookingDTO, PaymentMethodDTO paymentMethodDTO) {
+    public BookHotelRoomRequestDTO(String username, BookingDTO booking) {
         this.username = username;
-        this.bookingDTO = bookingDTO;
-        this.paymentMethodDTO = paymentMethodDTO;
+        this.booking = booking;
     }
 
     public String getUsername() {
@@ -23,19 +21,11 @@ public class BookHotelRoomRequestDTO {
         this.username = username;
     }
 
-    public BookingDTO getBookingDTO() {
-        return bookingDTO;
+    public BookingDTO getBooking() {
+        return booking;
     }
 
-    public void setBookingDTO(BookingDTO bookingDTO) {
-        this.bookingDTO = bookingDTO;
-    }
-
-    public PaymentMethodDTO getPaymentMethodDTO() {
-        return paymentMethodDTO;
-    }
-
-    public void setPaymentMethodDTO(PaymentMethodDTO paymentMethodDTO) {
-        this.paymentMethodDTO = paymentMethodDTO;
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
     }
 }

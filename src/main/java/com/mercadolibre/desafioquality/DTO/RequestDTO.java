@@ -13,6 +13,7 @@ public class RequestDTO {
 
     //Me levanta los datos con el formato mm/dd/yyyy
     //Esto tengo que hacerle un refactor para que levante de la forma dd/mm/yyyy
+    //Mi sospecha es que se debe al tipo de dato optional que me está condicionando
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Optional<Date> dateFrom;
@@ -23,8 +24,6 @@ public class RequestDTO {
     public RequestDTO(Optional<Date> dateFrom, Optional<Date> dateTo, Optional<String> destination) throws ParseException {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
-        //this.dateFrom = DateFormatter.dateFormatter(dateFrom);
-        //this.dateTo = DateFormatter.dateFormatter(dateTo);
         this.destination = destination;
     }
 
