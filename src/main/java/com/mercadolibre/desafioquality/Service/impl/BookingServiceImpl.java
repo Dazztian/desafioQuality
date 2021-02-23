@@ -8,7 +8,7 @@ import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
 import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilterFactory;
@@ -16,6 +16,7 @@ import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFactory;
 import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.BookRequestValidation;
+import com.mercadolibre.desafioquality.Model.Validation.FlightSeatsValidation;
 import com.mercadolibre.desafioquality.Service.BookingService;
 import com.mercadolibre.desafioquality.utils.DateUtils;
 import org.springframework.stereotype.Service;
@@ -49,21 +50,19 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public FlightSeatsResponseDTO getAllAvailableFlightSeats(FlightSeatRequestDTO request) {
+    public FlightSeatsResponseDTO getAllAvailableFlightSeats(FlightSeatsRequestDTO request) {
 
-        //FlightSeatsResponseDTO responseDTO = FlightSeatRequestDTO.validateRequest(request);
+        FlightSeatsResponseDTO responseDTO = FlightSeatsValidation.validateRequest(request);
 
         //Modifico la response según lo q haya devuelto la validación de la request
-        //modifyResponse(request, responseDTO);
-
-        FlightSeatsResponseDTO responseDTO = new FlightSeatsResponseDTO(getFlightSeatsFiltered(request));
+        setResponseFromFlightSeat(request, responseDTO);
 
         return responseDTO;
 
     }
 
     @Override
-    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatRequestDTO request) {
+    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatsRequestDTO request) {
 
         List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
         Predicate<FlightSeatsDTO> compositeFilterRule;
@@ -160,6 +159,31 @@ public class BookingServiceImpl implements BookingService {
                 responseDTO.setTotal(amount * interest);
             }
         }
+    }
+
+    private void setResponseFromFlightSeat(FlightSeatsRequestDTO request, FlightSeatsResponseDTO responseDTO) {
+
+        List<FlightSeatsDTO> flightsFiltered;
+
+        //Compruebo que no haya errores en la request de ningún tipo
+        if (responseDTO.getStatusCode().getCode().equalsIgnoreCase("200"))
+        {
+            //Aplicamos los filtros
+            flightsFiltered = getFlightSeatsFiltered(request);
+
+            //Si a pesar de ser válida la request no encontró ningún destino disponible
+            if (flightsFiltered.size() < 1)
+            {
+                responseDTO.setStatusCode( new StatusCodeDTO("200","No se encontro ningun asiento de avión disponible para las fechas indicadas"));
+            }
+            else //Si llegaste hasta acá es el camino feliz
+            {
+                responseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado los siguientes asientos de avión disponibles"));
+            }
+            responseDTO.setFlightSeatsDTOSList(flightsFiltered);
+
+        }
+
     }
 
 }

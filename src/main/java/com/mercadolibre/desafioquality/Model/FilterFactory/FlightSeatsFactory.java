@@ -1,6 +1,6 @@
 package com.mercadolibre.desafioquality.Model.FilterFactory;
 
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
 
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import java.util.function.Predicate;
 
 public class FlightSeatsFactory {
 
-    public static Predicate<FlightSeatsDTO> getFlightSeatsFilter(FlightSeatRequestDTO request)
+    public static Predicate<FlightSeatsDTO> getFlightSeatsFilter(FlightSeatsRequestDTO request)
     {
         List<Predicate<FlightSeatsDTO>> allPredicates;
         allPredicates= getAllPredicates(request);
         return allPredicates.stream().reduce( p -> true, Predicate::and);
     }
 
-    private static List<Predicate<FlightSeatsDTO>> getAllPredicates(FlightSeatRequestDTO request)
+    private static List<Predicate<FlightSeatsDTO>> getAllPredicates(FlightSeatsRequestDTO request)
     {
         List<Predicate<FlightSeatsDTO>> allPredicates = new ArrayList<>();
         

@@ -6,7 +6,7 @@ import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
 
 import java.text.ParseException;
@@ -22,8 +22,8 @@ public interface BookingService {
     public BookHotelRoomResponseDTO bookHotel(BookHotelRoomRequestDTO bookHotelRoomRequestDTO) throws ParseException;
 
 
-    public FlightSeatsResponseDTO getAllAvailableFlightSeats(FlightSeatRequestDTO request);
-    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatRequestDTO request);
+    public FlightSeatsResponseDTO getAllAvailableFlightSeats(FlightSeatsRequestDTO request);
+    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatsRequestDTO request);
 
 
 
