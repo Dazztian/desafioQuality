@@ -23,7 +23,7 @@ public class BookingRestController {
     @Autowired
     BookingServiceImpl bookingService;
 
-    @GetMapping("/booking")
+    @PostMapping("/booking")
     public BookHotelRoomResponseDTO BookHotelRoom( @RequestBody BookHotelRoomRequestDTO request)
     {
         return bookingService.bookHotelRoom(request);

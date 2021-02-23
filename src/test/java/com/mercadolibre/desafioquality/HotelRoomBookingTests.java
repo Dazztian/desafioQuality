@@ -7,8 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,7 +31,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldBookHotelRoomWithPaymentMethodCreditCard6Dues() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -74,7 +73,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldBookHotelRoomWithPaymentMethodDebitCard() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -117,7 +116,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWithPaymentMethodDebitCardMoreThanOneDue() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -160,7 +159,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWithWrongEmail() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"alice#@example.me.org\",\n" +
@@ -203,7 +202,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWhenPeopleListDoesntMatchPeopleAmount() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -246,7 +245,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWhenDestinationIsNotFound() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -289,7 +288,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWhenDateFromIsPrevious() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -333,7 +332,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWhenLeavingDateIsLater() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
@@ -376,7 +375,7 @@ public class HotelRoomBookingTests {
 
     @Test
     void shouldNOTBeAbleToBookHotelRoomWhenLeavingDateIsEarlierThanEnteringDate() throws  Exception {
-        this.mockMvc.perform(get( request)
+        this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"username\":\"arjonamiguel@gmail.com\",\n" +
