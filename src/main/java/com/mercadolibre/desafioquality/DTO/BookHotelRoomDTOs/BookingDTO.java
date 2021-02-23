@@ -1,6 +1,7 @@
 package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mercadolibre.desafioquality.DTO.PaymentMethodDTO;
 
 import javax.validation.constraints.Past;
 import java.util.Date;

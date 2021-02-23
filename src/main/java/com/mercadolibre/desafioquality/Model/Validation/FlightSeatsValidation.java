@@ -1,10 +1,10 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
 import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
+import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
 
 import java.util.List;
 import java.util.Locale;

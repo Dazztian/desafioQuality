@@ -3,7 +3,7 @@ package com.mercadolibre.desafioquality.DAO.FlightDAO.Impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafioquality.DAO.FlightDAO.FlightSeatsDAO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 

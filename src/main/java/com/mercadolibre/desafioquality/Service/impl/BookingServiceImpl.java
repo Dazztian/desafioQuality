@@ -2,20 +2,24 @@ package com.mercadolibre.desafioquality.Service.impl;
 
 import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
 import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.RequestDTO;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.RequestDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatResponseDTO;
+import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
+import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
+import com.mercadolibre.desafioquality.Model.FilterFactory.BookFlightSeatFilterFactory;
 import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilterFactory;
-import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFactory;
+import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFilterFactory;
 import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
-import com.mercadolibre.desafioquality.Model.Validation.BookRequestValidation;
+import com.mercadolibre.desafioquality.Model.Validation.BookHotelRoomRequestValidation;
+import com.mercadolibre.desafioquality.Model.Validation.BookFlightSeatRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.FlightSeatsValidation;
 import com.mercadolibre.desafioquality.Service.BookingService;
 import com.mercadolibre.desafioquality.utils.DateUtils;
@@ -35,13 +39,29 @@ public class BookingServiceImpl implements BookingService {
 
     public BookingServiceImpl() { }
 
+    @Override
+    public BookFlightSeatResponseDTO BookFlightSeat(BookFlightSeatsRequestDTO bookFlightSeatsRequestDTO)
+    {
+
+        //1ero valido los datos
+        BookFlightSeatResponseDTO bookFlightSeatResponseDTO= BookFlightSeatRequestValidation.validateRequest(bookFlightSeatsRequestDTO);
+
+        //Seteamos la response
+        setResponseFromBookFlightSeat(bookFlightSeatsRequestDTO, bookFlightSeatResponseDTO);
+
+        return bookFlightSeatResponseDTO;
+    }
+
+
+
+
 
     @Override
-    public BookHotelRoomResponseDTO bookHotel(BookHotelRoomRequestDTO bookHotelRoomRequestDTO)  {
+    public BookHotelRoomResponseDTO bookHotelRoom(BookHotelRoomRequestDTO bookHotelRoomRequestDTO)  {
 
 
         //1ero valido los datos
-        BookHotelRoomResponseDTO bookHotelRoomResponseDTO= BookRequestValidation.validateRequest(bookHotelRoomRequestDTO);
+        BookHotelRoomResponseDTO bookHotelRoomResponseDTO= BookHotelRoomRequestValidation.validateRequest(bookHotelRoomRequestDTO);
 
         //Seteamos la response
         setResponseFromBookHotelRoom(bookHotelRoomRequestDTO, bookHotelRoomResponseDTO);
@@ -61,18 +81,33 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
+
     @Override
-    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatsRequestDTO request) {
+    public List<FlightSeatsDTO> getFlightSeatsFiltered(BookFlightSeatsRequestDTO request) {
 
         List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
         Predicate<FlightSeatsDTO> compositeFilterRule;
-        compositeFilterRule = FlightSeatsFactory.getFlightSeatsFilter(request);
+        compositeFilterRule = BookFlightSeatFilterFactory.getFlightSeatsFilter(request);
 
 
         return matches.stream()
                 .filter(compositeFilterRule)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatsRequestDTO request) {
+
+        List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
+        Predicate<FlightSeatsDTO> compositeFilterRule;
+        compositeFilterRule = FlightSeatsFilterFactory.getFlightSeatsFilter(request);
+
+
+        return matches.stream()
+                .filter(compositeFilterRule)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public ResponseDTO getAllAvailableHotels(RequestDTO request) {
@@ -152,7 +187,9 @@ public class BookingServiceImpl implements BookingService {
             {
                 Double price = Double.valueOf(hotelsFiltered.get(0).getPrice().toString()) ;
                 Double interest = responseDTO.getInterest();
-                Double amount =price * DateUtils.getDaysDifference(responseDTO);
+                //Double amount =price * DateUtils.getDaysDifference(responseDTO);
+                Double amount =price * DateUtils.getDaysDifference(responseDTO.getBookingDTO().getDateFrom(),
+                        responseDTO.getBookingDTO().getDateTo());
 
                 responseDTO.setAmount(amount);
                 responseDTO.setInterest(interest);
@@ -184,6 +221,41 @@ public class BookingServiceImpl implements BookingService {
 
         }
 
+    }
+
+    private void setResponseFromBookFlightSeat(BookFlightSeatsRequestDTO bookFlightSeatsRequestDTO,
+                                               BookFlightSeatResponseDTO bookFlightSeatResponseDTO)
+    {
+
+        List<FlightSeatsDTO> flightsFiltered;
+
+        //Compruebo que no haya errores en la request de ningún tipo
+        if (bookFlightSeatResponseDTO.getStatusCode().getCode().equalsIgnoreCase("200"))
+        {
+            //Aplicamos los filtros
+            flightsFiltered = getFlightSeatsFiltered(bookFlightSeatsRequestDTO);
+
+            //Si a pesar de ser válida la request no encontró ningún destino disponible
+            if (flightsFiltered.size() < 1)
+            {
+                bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","No se encontro ningun asiento de avión disponible para las fechas indicadas"));
+            }
+            else //Si llegaste hasta acá es el camino feliz
+            {
+                bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado los siguientes asientos de avión disponibles"));
+
+                Double price = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
+                Double interest = bookFlightSeatResponseDTO.getInterest();
+                Double amount =price * DateUtils.getDaysDifference(
+                                        bookFlightSeatResponseDTO.getFlightReservation().getDateFrom(),
+                                        bookFlightSeatResponseDTO.getFlightReservation().getDateTo()
+                                        );
+
+                bookFlightSeatResponseDTO.setAmount(amount);
+                bookFlightSeatResponseDTO.setInterest(interest);
+                bookFlightSeatResponseDTO.setTotal(amount * interest);
+            }
+        }
     }
 
 }

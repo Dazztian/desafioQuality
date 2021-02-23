@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO.AvailabilityDTOs;
+package com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs;
 
 import java.util.List;
 

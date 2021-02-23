@@ -1,17 +1,17 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
 import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.ErrorResponseDTO;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class BookRequestValidation {
+public class BookHotelRoomRequestValidation {
 
 
     public static boolean isValidDate(BookHotelRoomRequestDTO request) {
@@ -89,7 +89,8 @@ public class BookRequestValidation {
             {
                 if (isValidCreditCard(request))
                 {
-                    Double interestRecharge = 5.0 * (  (request.getBooking().getPaymentMethod().getDues()+1) / 3 );
+                    Double interestPercentage =  (5.0 * ( 1+ Math.floor(request.getBooking().getPaymentMethod().getDues() / 3) ) )/100;
+                    Double interestRecharge = 1 + interestPercentage;
                     return new BookHotelRoomResponseDTO(request.getUsername(), 0.0, interestRecharge, 0.0,
                             request.getBooking(), new StatusCodeDTO("200", "el proceso termino satisfactoriamente"));
                 }
@@ -122,9 +123,6 @@ public class BookRequestValidation {
 
             //Acá resolvemos toda la validación de los  método de pago
             return validatePaymentMethod(request);
-
-            //Informamos ERROR genérico si no cumplió con los medios de pagos y no se trata de ningún error en particular
-            //return new ErrorResponseDTO(request.getUsername(), request.getBooking(), new StatusCodeDTO("404", "ERROR"));
 
         }
 

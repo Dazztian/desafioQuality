@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO.FlightDtos;
+package com.mercadolibre.desafioquality.DTO.FlightSeatsDtos;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ public class FlightSeatsDTO {
     private String origin;
     private String destination;
     private String seatType;
-    private String price;
+    private Integer price;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -21,7 +21,7 @@ public class FlightSeatsDTO {
     public FlightSeatsDTO() {
     }
 
-    public FlightSeatsDTO(String flightNumber, String origin, String destination, String seatType, String price, String dateFrom, String dateTo) {
+    public FlightSeatsDTO(String flightNumber, String origin, String destination, String seatType, Integer price, String dateFrom, String dateTo) {
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
@@ -63,11 +63,11 @@ public class FlightSeatsDTO {
         this.seatType = seatType;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

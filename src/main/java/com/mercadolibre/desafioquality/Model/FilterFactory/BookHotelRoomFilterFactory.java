@@ -1,7 +1,7 @@
 package com.mercadolibre.desafioquality.Model.FilterFactory;
 
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 
 import java.util.ArrayList;
 import java.util.List;

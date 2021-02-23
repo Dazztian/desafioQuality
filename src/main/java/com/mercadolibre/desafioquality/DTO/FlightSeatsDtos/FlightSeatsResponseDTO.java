@@ -1,9 +1,9 @@
-package com.mercadolibre.desafioquality.DTO.FlightDtos;
+package com.mercadolibre.desafioquality.DTO.FlightSeatsDtos;
 
 import java.util.List;
 
 
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

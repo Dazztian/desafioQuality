@@ -1,6 +1,6 @@
 package com.mercadolibre.desafioquality.DAO.HotelRoomDAO;
 
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 
 import java.util.List;
 

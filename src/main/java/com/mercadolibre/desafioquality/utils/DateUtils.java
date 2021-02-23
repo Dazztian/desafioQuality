@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class DateUtils {
 
-    public static Long getDaysDifference(BookHotelRoomResponseDTO responseDTO) {
-        Date date1 = responseDTO.getBookingDTO().getDateFrom();
-        Date date2 = responseDTO.getBookingDTO().getDateTo();
+    public static Long getDaysDifference(Date date1, Date date2) {
+        //Date date1 = responseDTO.getBookingDTO().getDateFrom();
+        //Date date2 = responseDTO.getBookingDTO().getDateTo();
 
         long diffTime = date2.getTime() - date1.getTime();
         long diffDays = diffTime / (1000 * 60 * 60 * 24);

@@ -1,8 +1,6 @@
 package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookingDTO;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 
 public class ErrorResponseDTO extends BookHotelRoomResponseDTO {
 

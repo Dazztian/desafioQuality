@@ -1,7 +1,7 @@
 package com.mercadolibre.desafioquality.Model.FilterFactory;
 
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsRequestDTO;
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.function.Predicate;
 
 
-public class FlightSeatsFactory {
+public class FlightSeatsFilterFactory {
 
     public static Predicate<FlightSeatsDTO> getFlightSeatsFilter(FlightSeatsRequestDTO request)
     {

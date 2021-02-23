@@ -1,6 +1,6 @@
 package com.mercadolibre.desafioquality.DAO.FlightDAO;
 
-import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 
 import java.util.List;
 

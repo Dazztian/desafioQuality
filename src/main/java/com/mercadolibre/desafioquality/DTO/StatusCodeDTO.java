@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
+package com.mercadolibre.desafioquality.DTO;
 
 public class StatusCodeDTO {
 
