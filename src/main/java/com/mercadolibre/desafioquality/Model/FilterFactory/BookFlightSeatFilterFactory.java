@@ -26,16 +26,16 @@ public class BookFlightSeatFilterFactory {
 
 
         //ME ESTA PINCHANDO LAS FECHAS
-        /*if (request.getFlightReservation().getDateFrom()!= null && request.getFlightReservation().getDateTo()!= null)
+        if (request.getFlightReservation().getDateFrom()!= null && request.getFlightReservation().getDateTo()!= null)
         {
 
-            if(request.getFlightReservation().getDateFrom().before(request.getFlightReservation().getDateTo() ) )
+            if(request.getFlightReservation().getDateFrom().compareTo(request.getFlightReservation().getDateTo() ) <=0 )
             {
-                allPredicates.add( p -> p.getDateFrom().compareTo(request.getFlightReservation().getDateFrom()) ==0);
-                allPredicates.add( p -> p.getDateTo().compareTo(request.getFlightReservation().getDateTo()) == 0);
+                allPredicates.add( p -> p.getDateFrom().compareTo(request.getFlightReservation().getDateFrom()) <=0);
+                allPredicates.add( p -> p.getDateTo().compareTo(request.getFlightReservation().getDateTo()) >= 0);
 
             }
-        }*/
+        }
 
         if(request.getFlightReservation().getFlightNumber()!= null ) {
             allPredicates.add( p -> p.getFlightNumber().equalsIgnoreCase(request.getFlightReservation().getFlightNumber().toLowerCase(Locale.ROOT)));

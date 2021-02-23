@@ -3,7 +3,6 @@ package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mercadolibre.desafioquality.DTO.PaymentMethodDTO;
 
-import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class BookingDTO {
 
 
 
-    @Past
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -27,7 +25,7 @@ public class BookingDTO {
     public BookingDTO() {
     }
 
-    public BookingDTO(@Past Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> people, PaymentMethodDTO paymentMethod) {
+    public BookingDTO( Date dateFrom, Date dateTo, String destination, String hotelCode, Integer peopleAmount, String roomType, List<PeopleDTO> people, PaymentMethodDTO paymentMethod) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.destination = destination;
