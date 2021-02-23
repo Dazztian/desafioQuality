@@ -69,7 +69,7 @@ public class HotelRoomBookingTests {
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"userName\":\"arjonamiguel@gmail.com\",\"amount\":524720.0,\"interest\":10.0,\"total\":5247200.0,\"bookingDTO\":{\"dateFrom\":\"17/04/2021\",\"dateTo\":\"12/06/2021\",\"destination\":\"Cartagena\",\"hotelCode\":\"BG/0004\",\"peopleAmount\":2,\"roomType\":\"Múltiple\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCodeDTO\":{\"code\":\"200\",\"message\":\"el proceso termino satisfactoriamente\"}}"));
+                .andExpect(content().json("{\"userName\":\"arjonamiguel@gmail.com\",\"amount\":524720.0,\"interest\":1.15,\"total\":603428.0,\"bookingDTO\":{\"dateFrom\":\"17/04/2021\",\"dateTo\":\"12/06/2021\",\"destination\":\"Cartagena\",\"hotelCode\":\"BG/0004\",\"peopleAmount\":2,\"roomType\":\"Múltiple\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCodeDTO\":{\"code\":\"200\",\"message\":\"el proceso termino satisfactoriamente\"}}"));
     }
 
     @Test

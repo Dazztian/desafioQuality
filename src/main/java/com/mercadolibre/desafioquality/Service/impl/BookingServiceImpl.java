@@ -242,7 +242,7 @@ public class BookingServiceImpl implements BookingService {
             }
             else //Si llegaste hasta acá es el camino feliz
             {
-                bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado los siguientes asientos de avión disponibles"));
+                bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado asientos de avión disponibles"));
 
                 Double price = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
                 Double interest = bookFlightSeatResponseDTO.getInterest();
