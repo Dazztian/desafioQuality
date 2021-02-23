@@ -25,14 +25,13 @@ public class BookFlightSeatFilterFactory {
         List<Predicate<FlightSeatsDTO>> allPredicates = new ArrayList<>();
 
 
-        //ME ESTA PINCHANDO LAS FECHAS
         if (request.getFlightReservation().getDateFrom()!= null && request.getFlightReservation().getDateTo()!= null)
         {
 
             if(request.getFlightReservation().getDateFrom().compareTo(request.getFlightReservation().getDateTo() ) <=0 )
             {
-                allPredicates.add( p -> p.getDateFrom().compareTo(request.getFlightReservation().getDateFrom()) <=0);
-                allPredicates.add( p -> p.getDateTo().compareTo(request.getFlightReservation().getDateTo()) >= 0);
+                allPredicates.add( p -> p.getDateFrom().compareTo(request.getFlightReservation().getDateFrom()) ==0);
+                allPredicates.add( p -> p.getDateTo().compareTo(request.getFlightReservation().getDateTo()) == 0);
 
             }
         }

@@ -235,7 +235,7 @@ public class BookingServiceImpl implements BookingService {
             //Aplicamos los filtros
             flightsFiltered = getFlightSeatsFiltered(bookFlightSeatsRequestDTO);
 
-            //Si a pesar de ser válida la request no encontró ningún destino disponible
+            //Si a pesar de ser válida la request no encontró ningún asiento de avión disponible
             if (flightsFiltered.size() < 1)
             {
                 bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","No se encontro ningun asiento de avión disponible para las fechas indicadas"));
@@ -244,16 +244,14 @@ public class BookingServiceImpl implements BookingService {
             {
                 bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado asientos de avión disponibles"));
 
-                Double price = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
+                Double amount = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
                 Double interest = bookFlightSeatResponseDTO.getInterest();
-                Double amount =price * DateUtils.getDaysDifference(
-                                        bookFlightSeatResponseDTO.getFlightReservation().getDateFrom(),
-                                        bookFlightSeatResponseDTO.getFlightReservation().getDateTo()
-                                        );
+
 
                 bookFlightSeatResponseDTO.setAmount(amount);
-                bookFlightSeatResponseDTO.setInterest(interest);
-                bookFlightSeatResponseDTO.setTotal(amount * interest);
+                //De esta manera mostramos porcentualmente el interes, un 15% se vería como 15
+                bookFlightSeatResponseDTO.setInterest( Math.ceil( (interest-1) *100) );
+                bookFlightSeatResponseDTO.setTotal( Math.ceil(amount * interest));
             }
         }
     }

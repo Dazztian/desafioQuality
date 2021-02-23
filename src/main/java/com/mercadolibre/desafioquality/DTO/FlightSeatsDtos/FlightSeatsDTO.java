@@ -12,6 +12,7 @@ public class FlightSeatsDTO {
     private String origin;
     private String destination;
     private String seatType;
+    //Me está levantando los 11.000 como 11, tengo que arreglarlo
     private Integer price;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dateFrom;
