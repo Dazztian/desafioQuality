@@ -15,6 +15,8 @@ public class FlightSeatsRequestDTO {
     private String origin;
     private String destination;
 
+    public FlightSeatsRequestDTO() {
+    }
 
     //El tipo Date siempre me levanta los datos del tipo mm/dd/yyyy
     //Yo puedo mandar la fecha en formato "dd/mm/yyyy" y luego convertirla a lo que espera

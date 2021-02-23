@@ -1,6 +1,7 @@
 package com.mercadolibre.desafioquality.DTO.AvailabilityDTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mercadolibre.desafioquality.utils.DateUtils;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -8,46 +9,47 @@ import java.util.Optional;
 
 public class RequestDTO {
 
-    //Me está levantando mal los datos!!!
-    //Le ponga o no la anotation me levanta mal los datos
 
-    //Me levanta los datos con el formato mm/dd/yyyy
-    //Esto tengo que hacerle un refactor para que levante de la forma dd/mm/yyyy
+    //Me levanta los datos con el formato mm/dd/yyyy y necesito que estén con el formato dd/mm/yyyy
+    //Puedo hacerle un refactor con lo que hay en la parte de FlightSeats
     //Mi sospecha es que se debe al tipo de dato optional que me está condicionando
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private Optional<Date> dateFrom;
+    private Date dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private Optional<Date> dateTo;
-    private Optional<String> destination;
+    private Date dateTo;
+    private String destination;
 
-    public RequestDTO(Optional<Date> dateFrom, Optional<Date> dateTo, Optional<String> destination) throws ParseException {
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
+    public RequestDTO() {
+    }
+
+    public RequestDTO(String dateFrom, String dateTo, String destination) throws ParseException {
+        this.dateFrom = new Date(DateUtils.dateFormatConvertor(dateFrom));
+        this.dateTo = new Date(DateUtils.dateFormatConvertor(dateTo));
         this.destination = destination;
     }
 
-    public Optional<Date> getDateFrom() {
+    public Date getDateFrom() {
         return dateFrom;
     }
 
-    public void setDateFrom(Optional<Date> dateFrom) {
-        this.dateFrom = dateFrom;
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = new Date(DateUtils.dateFormatConvertor(dateFrom));
     }
 
-    public Optional<Date> getDateTo() {
+    public Date getDateTo() {
         return dateTo;
     }
 
-    public void setDateTo(Optional<Date> dateTo) {
-        this.dateTo = dateTo;
+    public void setDateTo(String dateTo) {
+        this.dateTo = new Date(DateUtils.dateFormatConvertor(dateTo));
     }
 
-    public Optional<String> getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public void setDestination(Optional<String> destination) {
+    public void setDestination(String destination) {
         this.destination = destination;
     }
 }

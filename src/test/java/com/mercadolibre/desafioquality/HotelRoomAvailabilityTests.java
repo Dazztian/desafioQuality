@@ -200,7 +200,7 @@ class HotelRoomAvailabilityTests {
 	@Test
 	void shouldGetOnlyOneAvailableHotelRoomForDestinationPuertoIguazuInSpecificDate() throws  Exception {
 
-		String request =  url.concat("?destination=Puerto Iguazú&dateFrom=02/10/2021&dateTo=03/20/2021");
+		String request =  url.concat("?destination=Puerto Iguazú&dateFrom=10/02/2021&dateTo=20/03/2021");
 		this.mockMvc.perform(get(request))
 				.andDo(print())
 				.andExpect(status().isOk())

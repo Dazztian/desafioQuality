@@ -15,9 +15,9 @@ public class AvailabilityRequestValidation {
     //Hay un error que no estoy capturando y es el de si ponen una única fecha anterior/posterior a la que hay disponible
     public static boolean isValidDate(RequestDTO request)
     {
-        if(request.getDateFrom().isPresent() && request.getDateTo().isPresent())
+        if(request.getDateFrom()!= null && request.getDateTo()!= null)
             //la fecha de inicio de la request debe ser  ANTERIOR a su fecha de fin
-            return request.getDateFrom().get().before(request.getDateTo().get() );
+            return request.getDateFrom().before(request.getDateTo() );
 
         return true;
     }
@@ -25,11 +25,11 @@ public class AvailabilityRequestValidation {
     public static boolean isValidDestination(RequestDTO request)
     {
         //Si el destino está presente, entonces nos fijamos si existe en la BD
-        if (request.getDestination().isPresent())
+        if (request.getDestination()!= null)
         {
             BookingDaoImpl apiBusqueda = new BookingDaoImpl();
             List<HotelDTO> matches = apiBusqueda.getAllHotels();
-            return matches.stream().anyMatch( hotel -> hotel.getDestination().equalsIgnoreCase(request.getDestination().get().toLowerCase(Locale.ROOT)));
+            return matches.stream().anyMatch( hotel -> hotel.getDestination().equalsIgnoreCase(request.getDestination().toLowerCase(Locale.ROOT)));
         }
 
         //Como no le pasamos ningun destino, entonces devolvemos true para que considere como válido el destino vacío
@@ -38,7 +38,7 @@ public class AvailabilityRequestValidation {
 
     public static boolean isValidButEmpty(RequestDTO request)
     {
-        return request.getDestination().isEmpty() && request.getDateFrom().isEmpty() && request.getDateTo().isEmpty();
+        return request.getDestination()== null && request.getDateFrom()== null && request.getDateTo()== null;
 
     }
 
