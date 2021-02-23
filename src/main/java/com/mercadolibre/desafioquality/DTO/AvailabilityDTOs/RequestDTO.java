@@ -5,14 +5,9 @@ import com.mercadolibre.desafioquality.utils.DateUtils;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Optional;
 
 public class RequestDTO {
 
-
-    //Me levanta los datos con el formato mm/dd/yyyy y necesito que estén con el formato dd/mm/yyyy
-    //Puedo hacerle un refactor con lo que hay en la parte de FlightSeats
-    //Mi sospecha es que se debe al tipo de dato optional que me está condicionando
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dateFrom;

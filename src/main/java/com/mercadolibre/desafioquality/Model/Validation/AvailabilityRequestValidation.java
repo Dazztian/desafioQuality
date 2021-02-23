@@ -12,7 +12,6 @@ public class AvailabilityRequestValidation {
 
 
 
-    //Hay un error que no estoy capturando y es el de si ponen una única fecha anterior/posterior a la que hay disponible
     public static boolean isValidDate(RequestDTO request)
     {
         if(request.getDateFrom()!= null && request.getDateTo()!= null)
