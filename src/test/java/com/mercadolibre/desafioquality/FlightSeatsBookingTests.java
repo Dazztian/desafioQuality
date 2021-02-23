@@ -29,44 +29,129 @@ public class FlightSeatsBookingTests {
 
 
     @Test
-    void shouldBookHotelRoomWithPaymentMethodCreditCard6Dues() throws  Exception {
+    void shouldBookFlightSeatSuccesfully() throws  Exception {
         this.mockMvc.perform(post( request)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
-                        "    \"username\":\"arjonamiguel@gmail.com\",\n" +
-                        "    \"booking\": {\n" +
-                        "        \"dateFrom\":\"17/04/2021\",\n" +
-                        "        \"dateTo\":\"12/06/2021\",\n" +
-                        "        \"destination\":\"Cartagena\",\n" +
-                        "        \"hotelCode\":\"BG/0004\",\n" +
-                        "        \"peopleAmount\":2,\n" +
-                        "        \"roomType\":\"Múltiple\",\n" +
+                        "    \"userName\":\"julio@gmail.com\",\n" +
+                        "    \"flightReservation\": {\n" +
+                        "        \"dateFrom\":\"10/02/2021\",\n" +
+                        "        \"dateTo\":\"24/02/2021\",\n" +
+                        "        \"origin\":\"Bogotá\",\n" +
+                        "        \"destination\":\"Medellín\",\n" +
+                        "        \"flightNumber\":\"BOME-4442\",\n" +
+                        "        \"seats\":2,\n" +
+                        "        \"seatType\":\"Economy\",\n" +
                         "        \"people\": [\n" +
                         "            {\n" +
                         "                \"dni\":\"12345678\",\n" +
                         "                \"name\":\"Pepito\",\n" +
-                        "                \"lastname\": \"Gomez\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
                         "                \"birthDate\": \"10/11/1982\",\n" +
                         "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
                         "            },\n" +
                         "            {\n" +
                         "                \"dni\":\"12345678\",\n" +
                         "                \"name\":\"Fulanito\",\n" +
-                        "                \"lastname\": \"Gomez\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
                         "                \"birthDate\":\"10/11/1983\",\n" +
                         "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
                         "            }\n" +
                         "        ]\n" +
-                        "    , \n" +
-                        "    \"paymentMethod\": {\n" +
+                        "    , \"paymentMethod\": {\n" +
                         "        \"type\":\"credito\",\n" +
                         "        \"number\":\"345345\",\n" +
-                        "        \"dues\": 6\n" +
+                        "        \"dues\":6\n" +
                         "    }\n" +
                         "    }\n" +
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"userName\":\"arjonamiguel@gmail.com\",\"amount\":524720.0,\"interest\":1.15,\"total\":603428.0,\"bookingDTO\":{\"dateFrom\":\"17/04/2021\",\"dateTo\":\"12/06/2021\",\"destination\":\"Cartagena\",\"hotelCode\":\"BG/0004\",\"peopleAmount\":2,\"roomType\":\"Múltiple\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"Gomez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCodeDTO\":{\"code\":\"200\",\"message\":\"el proceso termino satisfactoriamente\"}}"));
+                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":11000.0,\"interest\":15.0,\"total\":12650.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Medellín\",\"seatType\":\"Economy\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"200\",\"message\":\"Se han encontrado asientos de avión disponibles\"}}"));
+    }
+
+    @Test
+    void shouldNOTBookFlightSeatSuccesfullyDestinationDoesNotExists() throws  Exception {
+        this.mockMvc.perform(post( request)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "    \"userName\":\"julio@gmail.com\",\n" +
+                        "    \"flightReservation\": {\n" +
+                        "        \"dateFrom\":\"10/02/2021\",\n" +
+                        "        \"dateTo\":\"24/02/2021\",\n" +
+                        "        \"origin\":\"Bogotá\",\n" +
+                        "        \"destination\":\"Scerze\",\n" +
+                        "        \"flightNumber\":\"BOME-4442\",\n" +
+                        "        \"seats\":2,\n" +
+                        "        \"seatType\":\"Economy\",\n" +
+                        "        \"people\": [\n" +
+                        "            {\n" +
+                        "                \"dni\":\"12345678\",\n" +
+                        "                \"name\":\"Pepito\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
+                        "                \"birthDate\": \"10/11/1982\",\n" +
+                        "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"dni\":\"12345678\",\n" +
+                        "                \"name\":\"Fulanito\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
+                        "                \"birthDate\":\"10/11/1983\",\n" +
+                        "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    , \"paymentMethod\": {\n" +
+                        "        \"type\":\"credito\",\n" +
+                        "        \"number\":\"345345\",\n" +
+                        "        \"dues\":6\n" +
+                        "    }\n" +
+                        "    }\n" +
+                        "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":0.0,\"interest\":0.0,\"total\":0.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Scerze\",\"seatType\":\"Economy\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"404\",\"message\":\"El destino elegido no existe\"}}"));
+    }
+
+
+    @Test
+    void shouldNOTBookFlightSeatSuccesfullyOriginDoesNotExists() throws  Exception {
+        this.mockMvc.perform(post( request)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "    \"userName\":\"julio@gmail.com\",\n" +
+                        "    \"flightReservation\": {\n" +
+                        "        \"dateFrom\":\"10/02/2021\",\n" +
+                        "        \"dateTo\":\"24/02/2021\",\n" +
+                        "        \"origin\":\"Azen\",\n" +
+                        "        \"destination\":\"Medellín\",\n" +
+                        "        \"flightNumber\":\"BOME-4442\",\n" +
+                        "        \"seats\":2,\n" +
+                        "        \"seatType\":\"Economy\",\n" +
+                        "        \"people\": [\n" +
+                        "            {\n" +
+                        "                \"dni\":\"12345678\",\n" +
+                        "                \"name\":\"Pepito\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
+                        "                \"birthDate\": \"10/11/1982\",\n" +
+                        "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"dni\":\"12345678\",\n" +
+                        "                \"name\":\"Fulanito\",\n" +
+                        "                \"lastname\":\"gonzalez\",\n" +
+                        "                \"birthDate\":\"10/11/1983\",\n" +
+                        "                \"mail\":\"arjonamiguel@gmail.com\"\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    , \"paymentMethod\": {\n" +
+                        "        \"type\":\"credito\",\n" +
+                        "        \"number\":\"345345\",\n" +
+                        "        \"dues\":6\n" +
+                        "    }\n" +
+                        "    }\n" +
+                        "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":0.0,\"interest\":0.0,\"total\":0.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Azen\",\"destination\":\"Medellín\",\"seatType\":\"Economy\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"404\",\"message\":\"El Origen elegido no existe\"}}"));
     }
 }

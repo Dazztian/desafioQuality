@@ -1,12 +1,11 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
 
-import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.ErrorResponseDTO;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 
 import java.util.List;
@@ -26,13 +25,24 @@ public class BookFlightSeatRequestValidation {
 
     public static boolean isValidDestination(BookFlightSeatsRequestDTO request) {
         if (request.getFlightReservation().getDestination() != null) {
-            BookingDaoImpl apiBusqueda = new BookingDaoImpl();
-            List<HotelDTO> matches = apiBusqueda.getAllHotels();
-            return matches.stream().anyMatch(hotel -> hotel.getDestination().equalsIgnoreCase(request.getFlightReservation().getDestination().toLowerCase(Locale.ROOT)));
+            FlightSeatsDAOImpl apiBusqueda = new FlightSeatsDAOImpl();
+            List<FlightSeatsDTO> matches = apiBusqueda.getAllFlightSeats();
+            return matches.stream().anyMatch(flightSeat -> flightSeat.getDestination().equalsIgnoreCase(request.getFlightReservation().getDestination().toLowerCase(Locale.ROOT)));
         }
 
         return true;
     }
+
+    public static boolean isValidOrigin(BookFlightSeatsRequestDTO request) {
+        if (request.getFlightReservation().getOrigin() != null) {
+            FlightSeatsDAOImpl apiBusqueda = new FlightSeatsDAOImpl();
+            List<FlightSeatsDTO> matches = apiBusqueda.getAllFlightSeats();
+            return matches.stream().anyMatch(flightSeat -> flightSeat.getOrigin().equalsIgnoreCase(request.getFlightReservation().getOrigin().toLowerCase(Locale.ROOT)));
+        }
+
+        return true;
+    }
+
 
     public static boolean isValidAmountOfPeople(BookFlightSeatsRequestDTO request) {
 
@@ -118,6 +128,10 @@ public class BookFlightSeatRequestValidation {
 
         if (!isValidDestination(request))
             return new ErrorResponseDTO(request.getUserName(), request.getFlightReservation(), new StatusCodeDTO("404", "El destino elegido no existe"));
+
+        if (!isValidOrigin(request))
+            return new ErrorResponseDTO(request.getUserName(), request.getFlightReservation(), new StatusCodeDTO("404", "El Origen elegido no existe"));
+
 
         if (!isValidDate(request))
             return new ErrorResponseDTO(request.getUserName(), request.getFlightReservation(), new StatusCodeDTO("404", "La fecha de salida debe ser mayor a la de entrada"));
