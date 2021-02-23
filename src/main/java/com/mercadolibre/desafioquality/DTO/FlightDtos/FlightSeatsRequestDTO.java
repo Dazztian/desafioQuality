@@ -16,9 +16,9 @@ import java.util.Date;
 public class FlightSeatsRequestDTO {
 
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd/MM/yyyy")
     private Date dateFrom;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern =  "dd/MM/yyyy")
     private Date dateTo;
     private String origin;
     private String destination;

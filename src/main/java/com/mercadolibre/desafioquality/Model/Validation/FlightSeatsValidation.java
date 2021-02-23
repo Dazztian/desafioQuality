@@ -48,7 +48,8 @@ public class FlightSeatsValidation {
 
     public static boolean isValidButEmpty(FlightSeatsRequestDTO request)
     {
-        return request.getDestination()== null && request.getDateFrom()== null && request.getDateTo()== null;
+        return  request.getDestination()== null  && request.getOrigin() == null &&
+                request.getDateFrom()== null && request.getDateTo()== null;
 
     }
 

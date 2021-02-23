@@ -24,14 +24,10 @@ public class FlightSeatsFactory {
         
 
         if (request.getDateFrom()!= null && request.getDateTo()== null) {
-            allPredicates.add(p -> p.getDateFrom().compareTo(request.getDateFrom()) <= 0
-                    && p.getDateTo().compareTo(request.getDateFrom()) >=0);
-        }
+            allPredicates.add(p -> p.getDateFrom().compareTo(request.getDateFrom()) == 0); }
 
         if (request.getDateTo()!= null && request.getDateFrom()== null) {
-            allPredicates.add( p -> p.getDateTo().compareTo(request.getDateTo()) >= 0
-                    && p.getDateFrom().compareTo(request.getDateTo()) <=0);
-
+            allPredicates.add( p -> p.getDateTo().compareTo(request.getDateTo()) == 0);
         }
 
         if (request.getDateFrom()!= null && request.getDateTo()!= null)
@@ -39,10 +35,8 @@ public class FlightSeatsFactory {
 
             if(request.getDateFrom().before(request.getDateTo() ) )
             {
-                allPredicates.add( p -> p.getDateFrom().before(request.getDateFrom())
-                        && p.getDateTo().compareTo(request.getDateFrom()) >=0);
-                allPredicates.add( p -> p.getDateTo().after(request.getDateTo())
-                        && p.getDateFrom().compareTo(request.getDateTo()) <=0);
+                allPredicates.add( p -> p.getDateFrom().compareTo(request.getDateFrom()) ==0);
+                allPredicates.add( p -> p.getDateTo().compareTo(request.getDateTo()) == 0);
 
             }
         }
