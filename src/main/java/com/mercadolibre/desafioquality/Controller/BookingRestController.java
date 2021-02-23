@@ -5,6 +5,8 @@ import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomReques
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.RequestDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
 import com.mercadolibre.desafioquality.Service.impl.BookingServiceImpl;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +39,9 @@ public class BookingRestController {
     }
 
     @GetMapping("/flights")
-    public ResponseDTO getAllAvailableFlights(RequestDTO request)
+    public FlightSeatsResponseDTO getAllAvailableFlights(FlightSeatRequestDTO request)
     {
-        return bookingService.getAllAvailableHotels(request);
+        return bookingService.getAllAvailableFlightSeats(request);
     }
 
 }

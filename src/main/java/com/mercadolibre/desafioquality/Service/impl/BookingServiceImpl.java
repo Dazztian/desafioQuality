@@ -1,13 +1,18 @@
 package com.mercadolibre.desafioquality.Service.impl;
 
-import com.mercadolibre.desafioquality.DAO.Impl.BookingDaoImpl;
+import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
+import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.RequestDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.ResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.StatusCodeDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatRequestDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsResponseDTO;
 import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilterFactory;
+import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFactory;
 import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.BookRequestValidation;
@@ -25,9 +30,9 @@ public class BookingServiceImpl implements BookingService {
 
 
     BookingDaoImpl apiBusqueda = new BookingDaoImpl();
+    FlightSeatsDAOImpl apiBusquedaFlightSeats = new FlightSeatsDAOImpl();
 
     public BookingServiceImpl() { }
-
 
 
     @Override
@@ -43,7 +48,32 @@ public class BookingServiceImpl implements BookingService {
         return bookHotelRoomResponseDTO;
     }
 
+    @Override
+    public FlightSeatsResponseDTO getAllAvailableFlightSeats(FlightSeatRequestDTO request) {
 
+        //FlightSeatsResponseDTO responseDTO = FlightSeatRequestDTO.validateRequest(request);
+
+        //Modifico la response según lo q haya devuelto la validación de la request
+        //modifyResponse(request, responseDTO);
+
+        FlightSeatsResponseDTO responseDTO = new FlightSeatsResponseDTO(getFlightSeatsFiltered(request));
+
+        return responseDTO;
+
+    }
+
+    @Override
+    public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatRequestDTO request) {
+
+        List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
+        Predicate<FlightSeatsDTO> compositeFilterRule;
+        compositeFilterRule = FlightSeatsFactory.getFlightSeatsFilter(request);
+
+
+        return matches.stream()
+                .filter(compositeFilterRule)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public ResponseDTO getAllAvailableHotels(RequestDTO request) {
@@ -56,7 +86,6 @@ public class BookingServiceImpl implements BookingService {
         return responseDTO;
 
     }
-
 
     @Override
     public List<HotelDTO> getHotelsFiltered(RequestDTO request)
@@ -73,7 +102,6 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
-
     @Override
     public List<HotelDTO> getHotelRoomsFiltered(BookHotelRoomRequestDTO bookHotelRoomRequestDTO)
     {
@@ -88,8 +116,6 @@ public class BookingServiceImpl implements BookingService {
                 .collect(Collectors.toList());
 
     }
-
-
 
     private void modifyResponse(RequestDTO request, ResponseDTO responseDTO) {
 

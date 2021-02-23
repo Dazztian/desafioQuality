@@ -1,4 +1,4 @@
-package com.mercadolibre.desafioquality.DAO;
+package com.mercadolibre.desafioquality.DAO.HotelRoomDAO;
 
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
 

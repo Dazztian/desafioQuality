@@ -1,9 +1,9 @@
-package com.mercadolibre.desafioquality.DAO.Impl;
+package com.mercadolibre.desafioquality.DAO.FlightDAO.Impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mercadolibre.desafioquality.DAO.BookingDao;
-import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
+import com.mercadolibre.desafioquality.DAO.FlightDAO.FlightSeatsDAO;
+import com.mercadolibre.desafioquality.DTO.FlightDtos.FlightSeatsDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
@@ -14,39 +14,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class BookingDaoImpl implements BookingDao {
+public class FlightSeatsDAOImpl implements FlightSeatsDAO {
 
-    private List<HotelDTO> database;
+    private List<FlightSeatsDTO> database;
 
-    public BookingDaoImpl()  {
+    public FlightSeatsDAOImpl()  {
         database = this.loadDatabase();
     }
 
     @Override
-    public List<HotelDTO> getAllHotels()
-    {
+    public List<FlightSeatsDTO> getAllFlightSeats() {
         return new ArrayList<>(this.database);
     }
 
 
-    public List<HotelDTO>  loadDatabase()  {
+    public List<FlightSeatsDTO>  loadDatabase()  {
         File file= null;
         try {
-            file = ResourceUtils.getFile("src/main/resources/hotels.json");
+            file = ResourceUtils.getFile("src/main/resources/flightsSeats.json");
         }
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<HotelDTO>> typeRef = new TypeReference<>() {};
-        List<HotelDTO> HotelDTOS = null;
+        TypeReference<List<FlightSeatsDTO>> typeRef = new TypeReference<>() {};
+        List<FlightSeatsDTO> flightSeatsDTOS = null;
         try {
-            HotelDTOS = objectMapper.readValue(file, typeRef);
+            flightSeatsDTOS = objectMapper.readValue(file, typeRef);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return HotelDTOS;
+        return flightSeatsDTOS;
     }
 
+    
 }

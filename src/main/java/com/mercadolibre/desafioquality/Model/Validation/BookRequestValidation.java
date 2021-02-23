@@ -1,6 +1,6 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
-import com.mercadolibre.desafioquality.DAO.Impl.BookingDaoImpl;
+import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
 import com.mercadolibre.desafioquality.DTO.AvailabilityDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
