@@ -2,13 +2,6 @@ package com.mercadolibre.desafioquality.DTO.FlightDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mercadolibre.desafioquality.utils.DateUtils;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -24,7 +17,7 @@ public class FlightSeatsRequestDTO {
 
 
     //El tipo Date siempre me levanta los datos del tipo mm/dd/yyyy
-    //Yo puedo mandar la fecha en formato "criollo" y luego convertirla a lo que espera
+    //Yo puedo mandar la fecha en formato "dd/mm/yyyy" y luego convertirla a lo que espera
     public FlightSeatsRequestDTO(String dateFrom, String dateTo, String origin, String destination)  {
         this.dateFrom = new Date(DateUtils.dateFormatConvertor(dateFrom));
         this.dateTo = new Date(DateUtils.dateFormatConvertor(dateTo));
