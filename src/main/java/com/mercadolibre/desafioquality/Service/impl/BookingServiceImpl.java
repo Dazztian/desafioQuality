@@ -95,6 +95,9 @@ public class BookingServiceImpl implements BookingService {
                 .collect(Collectors.toList());
     }
 
+    
+    //Es MUY parecido al método anterior que tiene el mismo nombre, 
+    // podría meterle un refactor para usar sólo 1 
     @Override
     public List<FlightSeatsDTO> getFlightSeatsFiltered(FlightSeatsRequestDTO request) {
 
@@ -185,17 +188,20 @@ public class BookingServiceImpl implements BookingService {
             }
             else //Si llegaste hasta acá es el camino feliz
             {
-                Double price = Double.valueOf(hotelsFiltered.get(0).getPrice().toString()) ;
-                Double interest = responseDTO.getInterest();
-                //Double amount =price * DateUtils.getDaysDifference(responseDTO);
-                Double amount =price * DateUtils.getDaysDifference(responseDTO.getBookingDTO().getDateFrom(),
-                        responseDTO.getBookingDTO().getDateTo());
-
-                responseDTO.setAmount(amount);
-                responseDTO.setInterest(interest);
-                responseDTO.setTotal(amount * interest);
+                setMoneyCostsFromBookingHotelRoom(responseDTO, hotelsFiltered);
             }
         }
+    }
+
+    private void setMoneyCostsFromBookingHotelRoom(BookHotelRoomResponseDTO responseDTO, List<HotelDTO> hotelsFiltered) {
+        Double price = Double.valueOf(hotelsFiltered.get(0).getPrice().toString()) ;
+        Double interest = responseDTO.getInterest();
+        Double amount =price * DateUtils.getDaysDifference(responseDTO.getBookingDTO().getDateFrom(),
+                responseDTO.getBookingDTO().getDateTo());
+
+        responseDTO.setAmount(amount);
+        responseDTO.setInterest(interest);
+        responseDTO.setTotal(amount * interest);
     }
 
     private void setResponseFromFlightSeat(FlightSeatsRequestDTO request, FlightSeatsResponseDTO responseDTO) {
@@ -244,16 +250,20 @@ public class BookingServiceImpl implements BookingService {
             {
                 bookFlightSeatResponseDTO.setStatusCode( new StatusCodeDTO("200","Se han encontrado asientos de avión disponibles"));
 
-                Double amount = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
-                Double interest = bookFlightSeatResponseDTO.getInterest();
-
-
-                bookFlightSeatResponseDTO.setAmount(amount);
-                //De esta manera mostramos porcentualmente el interes, un 15% se vería como 15
-                bookFlightSeatResponseDTO.setInterest( Math.ceil( (interest-1) *100) );
-                bookFlightSeatResponseDTO.setTotal( Math.ceil(amount * interest));
+                setMoneyCostFromBookingFlightSeat(bookFlightSeatResponseDTO, flightsFiltered);
             }
         }
+    }
+
+    private void setMoneyCostFromBookingFlightSeat(BookFlightSeatResponseDTO bookFlightSeatResponseDTO, List<FlightSeatsDTO> flightsFiltered)
+    {
+        Double amount = Double.valueOf(flightsFiltered.get(0).getPrice().toString()) ;
+        Double interest = bookFlightSeatResponseDTO.getInterest();
+
+        bookFlightSeatResponseDTO.setAmount(amount);
+        //De esta manera mostramos porcentualmente el interes, un 15% se vería como 15
+        bookFlightSeatResponseDTO.setInterest( Math.ceil( (interest-1) *100) );
+        bookFlightSeatResponseDTO.setTotal( Math.ceil(amount * interest));
     }
 
 }
