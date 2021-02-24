@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.function.Predicate;
 
 
-public class BookFlightSeatFilterFactory {
+public class BookFlightSeatFilter {
 
     public static Predicate<FlightSeatsDTO> getFlightSeatsFilter(BookFlightSeatsRequestDTO request)
     {

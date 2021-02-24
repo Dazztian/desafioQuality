@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.function.Predicate;
 
 
-public class FlightSeatsFilterFactory {
+public class FlightSeatsFilter {
 
     public static Predicate<FlightSeatsDTO> getFlightSeatsFilter(FlightSeatsRequestDTO request)
     {

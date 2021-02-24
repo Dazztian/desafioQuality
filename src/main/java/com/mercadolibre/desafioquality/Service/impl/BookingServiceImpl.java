@@ -13,10 +13,10 @@ import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
-import com.mercadolibre.desafioquality.Model.FilterFactory.BookFlightSeatFilterFactory;
-import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilterFactory;
-import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFilterFactory;
-import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilterFactory;
+import com.mercadolibre.desafioquality.Model.FilterFactory.BookFlightSeatFilter;
+import com.mercadolibre.desafioquality.Model.FilterFactory.BookHotelRoomFilter;
+import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFilter;
+import com.mercadolibre.desafioquality.Model.FilterFactory.HotelFilter;
 import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.BookHotelRoomRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.BookFlightSeatRequestValidation;
@@ -87,7 +87,7 @@ public class BookingServiceImpl implements BookingService {
 
         List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
         Predicate<FlightSeatsDTO> compositeFilterRule;
-        compositeFilterRule = BookFlightSeatFilterFactory.getFlightSeatsFilter(request);
+        compositeFilterRule = BookFlightSeatFilter.getFlightSeatsFilter(request);
 
 
         return matches.stream()
@@ -103,7 +103,7 @@ public class BookingServiceImpl implements BookingService {
 
         List<FlightSeatsDTO>  matches = apiBusquedaFlightSeats.getAllFlightSeats();
         Predicate<FlightSeatsDTO> compositeFilterRule;
-        compositeFilterRule = FlightSeatsFilterFactory.getFlightSeatsFilter(request);
+        compositeFilterRule = FlightSeatsFilter.getFlightSeatsFilter(request);
 
 
         return matches.stream()
@@ -130,7 +130,7 @@ public class BookingServiceImpl implements BookingService {
 
         List<HotelDTO>  matches = apiBusqueda.getAllHotels();
         Predicate<HotelDTO> compositeFilterRule;
-        compositeFilterRule = HotelFilterFactory.getHotelFilter(request);
+        compositeFilterRule = HotelFilter.getHotelFilter(request);
 
 
         return matches.stream()
@@ -145,7 +145,7 @@ public class BookingServiceImpl implements BookingService {
 
         List<HotelDTO>  matches = apiBusqueda.getAllHotels();
         Predicate<HotelDTO> compositeFilterRule;
-        compositeFilterRule = BookHotelRoomFilterFactory.getHotelRoomFilter(bookHotelRoomRequestDTO);
+        compositeFilterRule = BookHotelRoomFilter.getHotelRoomFilter(bookHotelRoomRequestDTO);
 
 
         return matches.stream()
