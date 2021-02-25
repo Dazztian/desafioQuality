@@ -7,12 +7,18 @@ import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomReques
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.RequestDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.ResponseDTO;
+import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
-import com.mercadolibre.desafioquality.Service.impl.BookingServiceImpl;
+import com.mercadolibre.desafioquality.Service.FlightSeatsService.FlightSeatService;
+import com.mercadolibre.desafioquality.Service.FlightSeatsService.impl.FlightSeatServiceImpl;
+import com.mercadolibre.desafioquality.Service.HotelRoomService.HotelRoomService;
+import com.mercadolibre.desafioquality.Service.HotelRoomService.impl.HotelRoomServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -20,31 +26,32 @@ import org.springframework.web.bind.annotation.*;
 public class BookingRestController {
 
 
-    @Autowired
-    BookingServiceImpl bookingService;
+    HotelRoomService hotelRoomService= new HotelRoomServiceImpl();
+    FlightSeatService flightSeatService = new FlightSeatServiceImpl();
+
 
     @PostMapping("/booking")
     public BookHotelRoomResponseDTO BookHotelRoom( @RequestBody BookHotelRoomRequestDTO request)
     {
-        return bookingService.bookHotelRoom(request);
+        return hotelRoomService.bookHotelRoom(request);
     }
 
     @GetMapping("/hotels")
     public ResponseDTO getAllAvailableHotelRooms(RequestDTO request)
     {
-        return bookingService.getAllAvailableHotels(request);
+        return hotelRoomService.getAllAvailableHotels(request);
     }
 
     @GetMapping("/flights")
     public FlightSeatsResponseDTO getAllAvailableFlights(FlightSeatsRequestDTO request)
     {
-        return bookingService.getAllAvailableFlightSeats(request);
+        return flightSeatService.getAllAvailableFlightSeats(request);
     }
 
     @PostMapping("/flight-reservation")
     public BookFlightSeatResponseDTO BookFlightSeat(@RequestBody BookFlightSeatsRequestDTO request)
     {
-        return bookingService.BookFlightSeat(request);
+        return flightSeatService.BookFlightSeat(request);
     }
 
 }
