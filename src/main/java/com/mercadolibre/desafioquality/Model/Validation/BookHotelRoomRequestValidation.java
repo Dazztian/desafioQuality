@@ -1,75 +1,48 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
-import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.ErrorResponseDTO;
 import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
 import com.mercadolibre.desafioquality.utils.InterestUtils;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
 
-public class BookHotelRoomRequestValidation extends Validator {
+public class BookHotelRoomRequestValidation  {
 
 
-    public static boolean isValidDate(BookHotelRoomRequestDTO request) {
-        if (request.getBooking().getDateFrom() != null && request.getBooking().getDateTo() != null)
-            return request.getBooking().getDateFrom().before(request.getBooking().getDateTo());
-
-        return true;
+    public static boolean isValidDate(BookHotelRoomRequestDTO request)
+    {
+        return Validator.isValidDate(request.getBooking().getDateFrom(), request.getBooking().getDateTo());
     }
 
-    public static boolean isValidDestination(BookHotelRoomRequestDTO request) {
-        if (request.getBooking().getDestination() != null) {
-            BookingDaoImpl apiBusqueda = new BookingDaoImpl();
-            List<HotelDTO> matches = apiBusqueda.getAllHotels();
-            return matches.stream().anyMatch(hotel -> hotel.getDestination().equalsIgnoreCase(request.getBooking().getDestination().toLowerCase(Locale.ROOT)));
-        }
-
-        return true;
+    public static boolean isValidDestination(BookHotelRoomRequestDTO request)
+    {
+        return Validator.isValidDestination(request.getBooking().getDestination());
     }
 
-    public static boolean isValidAmountOfPeople(BookHotelRoomRequestDTO request) {
-
-        //Comparo que la cantidad de gente coincida con la que aparece en la lista
-        return request.getBooking().getPeopleAmount() == request.getBooking().getPeople().size()
-                && request.getBooking().getPeopleAmount() != null
-                && request.getBooking().getPeople() != null;
+    public static boolean isValidAmountOfPeople(BookHotelRoomRequestDTO request)
+    {
+        return Validator.isValidAmountOfPeople(request.getBooking().getPeopleAmount(), request.getBooking().getPeople());
     }
 
-    public static boolean isValidEmail(BookHotelRoomRequestDTO request) {
-        if (request.getUsername() != null) {
-            String email = request.getUsername();
-
-            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                    "[a-zA-Z0-9_+&*-]+)*@" +
-                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                    "A-Z]{2,7}$";
-
-            Pattern pat = Pattern.compile(emailRegex);
-
-            return pat.matcher(email).matches();
-
-        }
-        //Si el username es null devolvemos false, xq necesitamos 1 mail
-        return false;
+    public static boolean isValidEmail(BookHotelRoomRequestDTO request)
+    {
+        return  Validator.isValidEmail(request.getUsername());
     }
 
 
-    //¿De dónde checkeas los datos extra de la tarjeta si sólo aparecen en la response?
-    public static boolean isValidDebitCard(BookHotelRoomRequestDTO request) {
-        return request.getBooking().getPaymentMethod().getDues() == 1;
+    public static boolean isValidDebitCard(BookHotelRoomRequestDTO request)
+    {
+        return Validator.isValidDebitCard(request.getBooking().getPaymentMethod().getDues());
     }
 
 
-    public static boolean isValidCreditCard(BookHotelRoomRequestDTO request) {
-        //No tengo manera de checkear el tema del interes ya que no viene dado en la request
-        return true;
+    public static boolean isValidCreditCard(BookHotelRoomRequestDTO request)
+    {
+        return Validator.isValidCreditCard();
     }
 
+    //Estaría más piola q devuelva un PaymentStatusDTO o algo así y hacerlo genérico para ambos casos
     public static BookHotelRoomResponseDTO validatePaymentMethod(BookHotelRoomRequestDTO request)
     {
         if (request.getBooking().getPaymentMethod() != null)
@@ -83,6 +56,7 @@ public class BookHotelRoomRequestValidation extends Validator {
                             request.getBooking(), new StatusCodeDTO("200", "el proceso termino satisfactoriamente"));
                 }
                 else
+                    //Esto estaría bueno que exista la clase "error" con sus distintas subclases que espefican cuando/donde lanzarse para cada una
                     { return new ErrorResponseDTO(request.getUsername(), request.getBooking(), new StatusCodeDTO("404", "Se ha ingresado una cantidad de cuotas distinta de 1")); }
             }
 
@@ -108,8 +82,6 @@ public class BookHotelRoomRequestValidation extends Validator {
     public static BookHotelRoomResponseDTO validateRequest (BookHotelRoomRequestDTO request)
     {
 
-            //¿Está bien que devuelva un 404 o debería devolver otro código?
-            //Como un 400 genérico
 
             if (!isValidEmail(request))
                 return new ErrorResponseDTO(request.getUsername(), request.getBooking(), new StatusCodeDTO("404", "Porfavor ingrese un e-mail válido"));

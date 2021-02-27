@@ -28,7 +28,6 @@ public class AvailabilityRequestValidation {
     public static ResponseDTO validateRequest(RequestDTO request)
     {
 
-        Boolean result = isValidButEmpty(request);
         if(isValidButEmpty(request))
             return new ResponseDTO("200", "request sin parametros, mostrando todos los destinos disponibles", null);
 

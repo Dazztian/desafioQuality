@@ -12,74 +12,44 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-//Esto estaría bueno resolverlo con generics o herencia e indicar como cada clase que hereda de un validation
-//Implementa el método validte y de qué manera
+
 public class BookFlightSeatRequestValidation {
 
-    public static boolean isValidDate(BookFlightSeatsRequestDTO request) {
-        if (request.getFlightReservation().getDateFrom() != null && request.getFlightReservation().getDateTo() != null)
-            return request.getFlightReservation().getDateFrom().before(request.getFlightReservation().getDateTo());
+    public static boolean isValidDate(BookFlightSeatsRequestDTO request)
+    {
+        return Validator.isValidDate(request.getFlightReservation().getDateFrom(), request.getFlightReservation().getDateTo());
 
-        return true;
     }
 
-    public static boolean isValidDestination(BookFlightSeatsRequestDTO request) {
-        if (request.getFlightReservation().getDestination() != null) {
-            FlightSeatsDAOImpl apiBusqueda = new FlightSeatsDAOImpl();
-            List<FlightSeatsDTO> matches = apiBusqueda.getAllFlightSeats();
-            return matches.stream().anyMatch(flightSeat -> flightSeat.getDestination().equalsIgnoreCase(request.getFlightReservation().getDestination().toLowerCase(Locale.ROOT)));
-        }
-
-        return true;
+    public static boolean isValidDestination(BookFlightSeatsRequestDTO request)
+    {
+        return Validator.isValidDestination(request.getFlightReservation().getDestination());
     }
 
-    public static boolean isValidOrigin(BookFlightSeatsRequestDTO request) {
-        if (request.getFlightReservation().getOrigin() != null) {
-            FlightSeatsDAOImpl apiBusqueda = new FlightSeatsDAOImpl();
-            List<FlightSeatsDTO> matches = apiBusqueda.getAllFlightSeats();
-            return matches.stream().anyMatch(flightSeat -> flightSeat.getOrigin().equalsIgnoreCase(request.getFlightReservation().getOrigin().toLowerCase(Locale.ROOT)));
-        }
-
-        return true;
+    public static boolean isValidOrigin(BookFlightSeatsRequestDTO request)
+    {
+        return Validator.isValidOrigin(request.getFlightReservation().getOrigin());
     }
 
 
-    public static boolean isValidAmountOfPeople(BookFlightSeatsRequestDTO request) {
-
-        //Comparo que la cantidad de gente coincida con la que aparece en la lista
-        return request.getFlightReservation().getSeats() == request.getFlightReservation().getPeople().size()
-                && request.getFlightReservation().getSeats() != null
-                && request.getFlightReservation().getPeople() != null;
+    public static boolean isValidAmountOfPeople(BookFlightSeatsRequestDTO request)
+    {
+        return Validator.isValidAmountOfPeople( request.getFlightReservation().getSeats(), request.getFlightReservation().getPeople());
     }
 
-    public static boolean isValidEmail(BookFlightSeatsRequestDTO request) {
-        if (request.getUserName() != null) {
-            String email = request.getUserName();
-
-            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                    "[a-zA-Z0-9_+&*-]+)*@" +
-                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                    "A-Z]{2,7}$";
-
-            Pattern pat = Pattern.compile(emailRegex);
-
-            return pat.matcher(email).matches();
-
-        }
-        //Si el username es null devolvemos false, xq necesitamos 1 mail
-        return false;
+    public static boolean isValidEmail(BookFlightSeatsRequestDTO request)
+    {
+        return Validator.isValidEmail(request.getUserName());
     }
 
 
-    //¿De dónde checkeas los datos extra de la tarjeta si sólo aparecen en la response?
     public static boolean isValidDebitCard(BookFlightSeatsRequestDTO request) {
-        return request.getFlightReservation().getPaymentMethod().getDues() == 1;
+        return Validator.isValidDebitCard(request.getFlightReservation().getPaymentMethod().getDues());
     }
 
 
     public static boolean isValidCreditCard(BookFlightSeatsRequestDTO request) {
-        //No tengo manera de checkear el tema del interes ya que no viene dado en la request
-        return true;
+        return Validator.isValidCreditCard();
     }
 
     public static BookFlightSeatResponseDTO validatePaymentMethod(BookFlightSeatsRequestDTO request)
