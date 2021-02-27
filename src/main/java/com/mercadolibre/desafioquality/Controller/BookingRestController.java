@@ -7,18 +7,15 @@ import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomReques
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.RequestDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.ResponseDTO;
-import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
+
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
 import com.mercadolibre.desafioquality.Service.FlightSeatsService.FlightSeatService;
-import com.mercadolibre.desafioquality.Service.FlightSeatsService.impl.FlightSeatServiceImpl;
 import com.mercadolibre.desafioquality.Service.HotelRoomService.HotelRoomService;
-import com.mercadolibre.desafioquality.Service.HotelRoomService.impl.HotelRoomServiceImpl;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,8 +23,11 @@ import java.util.List;
 public class BookingRestController {
 
 
-    HotelRoomService hotelRoomService= new HotelRoomServiceImpl();
-    FlightSeatService flightSeatService = new FlightSeatServiceImpl();
+    @Autowired
+    HotelRoomService hotelRoomService;
+
+    @Autowired
+    FlightSeatService flightSeatService;
 
 
     @PostMapping("/booking")

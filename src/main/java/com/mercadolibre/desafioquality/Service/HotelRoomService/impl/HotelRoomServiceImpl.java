@@ -13,11 +13,14 @@ import com.mercadolibre.desafioquality.Model.Validation.AvailabilityRequestValid
 import com.mercadolibre.desafioquality.Model.Validation.BookHotelRoomRequestValidation;
 import com.mercadolibre.desafioquality.Service.HotelRoomService.HotelRoomService;
 import com.mercadolibre.desafioquality.utils.DateUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+
+@Service
 public class HotelRoomServiceImpl implements HotelRoomService {
 
     BookingDaoImpl apiBusqueda = new BookingDaoImpl();

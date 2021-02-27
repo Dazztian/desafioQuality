@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
-//Esto """"""PODRÍA intentar""""" resolver con generics, pero debido al scope de tiempo prefiero no hacerlo así
-//SIN EMBARGO el comportamiento de getAllPredicates cambia según el tipo de dato, ya que no es lo mismo
-//el tratamiento que se le da un optional a un dato que no es optional
-
 public class BookHotelRoomFilter {
 
     public static Predicate<HotelDTO> getHotelRoomFilter(BookHotelRoomRequestDTO request)

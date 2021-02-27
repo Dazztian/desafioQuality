@@ -12,11 +12,14 @@ import com.mercadolibre.desafioquality.Model.FilterFactory.FlightSeatsFilter;
 import com.mercadolibre.desafioquality.Model.Validation.BookFlightSeatRequestValidation;
 import com.mercadolibre.desafioquality.Model.Validation.FlightSeatsValidation;
 import com.mercadolibre.desafioquality.Service.FlightSeatsService.FlightSeatService;
+import com.mercadolibre.desafioquality.utils.InterestUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Service
 public class FlightSeatServiceImpl implements FlightSeatService {
 
 
@@ -111,8 +114,7 @@ public class FlightSeatServiceImpl implements FlightSeatService {
         Double interest = bookFlightSeatResponseDTO.getInterest();
 
         bookFlightSeatResponseDTO.setAmount(amount);
-        //De esta manera mostramos porcentualmente el interes, un 15% se vería como 15
-        bookFlightSeatResponseDTO.setInterest( Math.ceil( (interest-1) *100) );
+        bookFlightSeatResponseDTO.setInterest(InterestUtils.calculateInterests(bookFlightSeatResponseDTO.getFlightReservation().getPaymentMethod().getDues()));
         bookFlightSeatResponseDTO.setTotal( Math.ceil(amount * interest));
     }
 

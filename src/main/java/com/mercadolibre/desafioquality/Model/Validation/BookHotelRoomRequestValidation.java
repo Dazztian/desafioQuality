@@ -6,6 +6,7 @@ import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomReques
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.BookHotelRoomResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.ErrorResponseDTO;
 import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
+import com.mercadolibre.desafioquality.utils.InterestUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -89,7 +90,8 @@ public class BookHotelRoomRequestValidation {
             {
                 if (isValidCreditCard(request))
                 {
-                    Double interestPercentage =  (5.0 * ( 1+ Math.floor(request.getBooking().getPaymentMethod().getDues() / 3) ) )/100;
+
+                    Double interestPercentage = InterestUtils.calculatePorcentageInterests(request.getBooking().getPaymentMethod().getDues());
                     Double interestRecharge = 1 + interestPercentage;
                     return new BookHotelRoomResponseDTO(request.getUsername(), 0.0, interestRecharge, 0.0,
                             request.getBooking(), new StatusCodeDTO("200", "el proceso termino satisfactoriamente"));
