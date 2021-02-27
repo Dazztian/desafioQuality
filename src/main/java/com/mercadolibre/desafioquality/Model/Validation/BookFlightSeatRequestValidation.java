@@ -67,8 +67,6 @@ public class BookFlightSeatRequestValidation {
             {
                 if (isValidCreditCard(request))
                 {
-                    //Lo dividimos por 100 ya que se trata de un PORCENTAJE
-                    //Double interestPorcentage =  (5.0 * ( 1 + Math.floor( (request.getFlightReservation().getPaymentMethod().getDues() / 3) ) ) /100);
                     Double interestPorcentage = InterestUtils.calculatePorcentageInterests(request.getFlightReservation().getPaymentMethod().getDues());
                     Double interestRecharge = 1 +interestPorcentage;
                     return new BookFlightSeatResponseDTO(request.getUserName(), 0.0, interestRecharge, 0.0,
@@ -83,7 +81,6 @@ public class BookFlightSeatRequestValidation {
     }
 
 
-    //Podría hacer que devuelva algo "base" y si está bien le agrego "cositas"
     public static BookFlightSeatResponseDTO validateRequest (BookFlightSeatsRequestDTO request)
     {
 
@@ -103,7 +100,6 @@ public class BookFlightSeatRequestValidation {
         if (!isValidDate(request))
             return new ErrorResponseDTO(request.getUserName(), request.getFlightReservation(), new StatusCodeDTO("404", "La fecha de salida debe ser mayor a la de entrada"));
 
-        //Acá resolvemos toda la validación de los  método de pago
         return validatePaymentMethod(request);
 
     }
