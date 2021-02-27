@@ -1,7 +1,7 @@
 package com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs.PeopleDTO;
+import com.mercadolibre.desafioquality.DTO.PeopleDTO;
 import com.mercadolibre.desafioquality.DTO.PaymentMethodDTO;
 import com.mercadolibre.desafioquality.utils.DateUtils;
 import java.util.Date;

@@ -2,6 +2,7 @@ package com.mercadolibre.desafioquality.DTO.BookHotelRoomDTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mercadolibre.desafioquality.DTO.PaymentMethodDTO;
+import com.mercadolibre.desafioquality.DTO.PeopleDTO;
 
 import java.util.Date;
 import java.util.List;

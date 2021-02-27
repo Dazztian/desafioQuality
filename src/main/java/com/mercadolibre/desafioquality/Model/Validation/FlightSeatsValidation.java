@@ -1,55 +1,35 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
-import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
 import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
-import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsResponseDTO;
 
-import java.util.List;
-import java.util.Locale;
 
+public class FlightSeatsValidation extends  Validator{
 
-public class FlightSeatsValidation {
-
-
-    static FlightSeatsDAOImpl apiBusqueda = new FlightSeatsDAOImpl();
-    static List<FlightSeatsDTO> matches = apiBusqueda.getAllFlightSeats();
 
 
     public static boolean isValidDate(FlightSeatsRequestDTO request)
     {
-        if(request.getDateFrom()!= null && request.getDateTo()!= null)
-            return request.getDateFrom().before(request.getDateTo() );
-
-        return true;
+       return  Validator.isValidDate(request.getDateFrom(), request.getDateTo());
     }
 
     public static boolean isValidDestination(FlightSeatsRequestDTO request)
     {
-        if (request.getDestination()!= null)
-        {
-            return matches.stream().anyMatch( hotel -> hotel.getDestination().equalsIgnoreCase(request.getDestination().toLowerCase(Locale.ROOT)));
-        }
-
-        //Como no le pasamos ningun destino, entonces devolvemos true para que considere como válido el destino vacío
-        return true;
+        return Validator.isValidDestination(request.getDestination());
     }
 
     public static boolean isValidOrigin(FlightSeatsRequestDTO request)
     {
-        if (request.getOrigin()!= null)
-        {
-            return matches.stream().anyMatch( hotel -> hotel.getOrigin().equalsIgnoreCase(request.getOrigin().toLowerCase(Locale.ROOT)));
-        }
-
-        return true;
+        return Validator.isValidOrigin(request.getOrigin());
     }
 
     public static boolean isValidButEmpty(FlightSeatsRequestDTO request)
     {
-        return  request.getDestination()== null  && request.getOrigin() == null &&
-                request.getDateFrom()== null && request.getDateTo()== null;
+
+        return Validator.isValidButEmpty(
+                request.getDestination(), request.getOrigin(),
+                request.getDateFrom(), request.getDateTo() );
 
     }
 

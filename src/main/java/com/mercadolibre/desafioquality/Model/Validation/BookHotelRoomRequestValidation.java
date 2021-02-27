@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class BookHotelRoomRequestValidation {
+public class BookHotelRoomRequestValidation extends Validator {
 
 
     public static boolean isValidDate(BookHotelRoomRequestDTO request) {
