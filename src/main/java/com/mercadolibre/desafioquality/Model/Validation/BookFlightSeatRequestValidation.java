@@ -1,16 +1,11 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
 
-import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatResponseDTO;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.BookFlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.BookFlightSeatsDTO.ErrorResponseDTO;
-import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
 import com.mercadolibre.desafioquality.DTO.StatusCodeDTO;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
+import com.mercadolibre.desafioquality.utils.InterestUtils;
 
 
 public class BookFlightSeatRequestValidation {
@@ -73,7 +68,8 @@ public class BookFlightSeatRequestValidation {
                 if (isValidCreditCard(request))
                 {
                     //Lo dividimos por 100 ya que se trata de un PORCENTAJE
-                    Double interestPorcentage =  (5.0 * ( 1 + Math.floor( (request.getFlightReservation().getPaymentMethod().getDues() / 3) ) ) /100);
+                    //Double interestPorcentage =  (5.0 * ( 1 + Math.floor( (request.getFlightReservation().getPaymentMethod().getDues() / 3) ) ) /100);
+                    Double interestPorcentage = InterestUtils.calculatePorcentageInterests(request.getFlightReservation().getPaymentMethod().getDues());
                     Double interestRecharge = 1 +interestPorcentage;
                     return new BookFlightSeatResponseDTO(request.getUserName(), 0.0, interestRecharge, 0.0,
                             request.getFlightReservation(), new StatusCodeDTO("200", "el proceso termino satisfactoriamente"));
@@ -87,6 +83,7 @@ public class BookFlightSeatRequestValidation {
     }
 
 
+    //Podría hacer que devuelva algo "base" y si está bien le agrego "cositas"
     public static BookFlightSeatResponseDTO validateRequest (BookFlightSeatsRequestDTO request)
     {
 

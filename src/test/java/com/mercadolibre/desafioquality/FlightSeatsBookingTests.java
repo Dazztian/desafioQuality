@@ -67,7 +67,7 @@ public class FlightSeatsBookingTests {
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":11000.0,\"interest\":10.0,\"total\":12650.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Medellín\",\"seatType\":\"Economy\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"200\",\"message\":\"Se han encontrado asientos de avión disponibles\"}}"));
+                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":11000.0,\"interest\":10.0,\"total\":12101.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Medellín\",\"seatType\":\"Economy\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"200\",\"message\":\"Se han encontrado asientos de avión disponibles\"}}"));
     }
 
     @Test
@@ -280,7 +280,7 @@ public class FlightSeatsBookingTests {
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":0.0,\"interest\":1.15,\"total\":0.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Medellín\",\"seatType\":\"SUPER ASIENTO\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"200\",\"message\":\"No se encontro ningun asiento de avión disponible para las fechas indicadas\"}}"));
+                .andExpect(content().json("{\"userName\":\"julio@gmail.com\",\"amount\":0.0,\"interest\":1.1,\"total\":0.0,\"flightReservation\":{\"flightNumber\":\"BOME-4442\",\"origin\":\"Bogotá\",\"destination\":\"Medellín\",\"seatType\":\"SUPER ASIENTO\",\"seats\":2,\"dateFrom\":\"10/02/2021\",\"dateTo\":\"24/02/2021\",\"people\":[{\"dni\":\"12345678\",\"name\":\"Pepito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1982\",\"mail\":\"arjonamiguel@gmail.com\"},{\"dni\":\"12345678\",\"name\":\"Fulanito\",\"lastname\":\"gonzalez\",\"birthDate\":\"10/11/1983\",\"mail\":\"arjonamiguel@gmail.com\"}],\"paymentMethod\":{\"type\":\"credito\",\"number\":\"345345\",\"dues\":6}},\"statusCode\":{\"code\":\"200\",\"message\":\"No se encontro ningun asiento de avión disponible para las fechas indicadas\"}}"));
     }
 
 
