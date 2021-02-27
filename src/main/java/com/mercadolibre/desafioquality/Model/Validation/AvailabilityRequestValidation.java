@@ -1,49 +1,34 @@
 package com.mercadolibre.desafioquality.Model.Validation;
 
-import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
-import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.ResponseDTO;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.RequestDTO;
-
-import java.util.List;
-import java.util.Locale;
 
 public class AvailabilityRequestValidation {
 
 
 
-    public static boolean isValidDate(RequestDTO request)
+    public static boolean isValidDate(RequestDTO  request)
     {
-        if(request.getDateFrom()!= null && request.getDateTo()!= null)
-            //la fecha de inicio de la request debe ser  ANTERIOR a su fecha de fin
-            return request.getDateFrom().before(request.getDateTo() );
-
-        return true;
+        return  Validator.isValidDate(request.getDateFrom(), request.getDateTo());
     }
 
-    public static boolean isValidDestination(RequestDTO request)
+    public static boolean isValidDestination(RequestDTO  request)
     {
-        //Si el destino está presente, entonces nos fijamos si existe en la BD
-        if (request.getDestination()!= null)
-        {
-            BookingDaoImpl apiBusqueda = new BookingDaoImpl();
-            List<HotelDTO> matches = apiBusqueda.getAllHotels();
-            return matches.stream().anyMatch( hotel -> hotel.getDestination().equalsIgnoreCase(request.getDestination().toLowerCase(Locale.ROOT)));
-        }
-
-        //Como no le pasamos ningun destino, entonces devolvemos true para que considere como válido el destino vacío
-        return true;
+        return Validator.isValidDestination(request.getDestination());
     }
 
-    public static boolean isValidButEmpty(RequestDTO request)
+    public static boolean isValidButEmpty(RequestDTO  request)
     {
-        return request.getDestination()== null && request.getDateFrom()== null && request.getDateTo()== null;
+
+        return Validator.isValidButEmpty(request.getDestination(), request.getDateFrom(), request.getDateTo() );
 
     }
 
 
     public static ResponseDTO validateRequest(RequestDTO request)
     {
+
+        Boolean result = isValidButEmpty(request);
         if(isValidButEmpty(request))
             return new ResponseDTO("200", "request sin parametros, mostrando todos los destinos disponibles", null);
 

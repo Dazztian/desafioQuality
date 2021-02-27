@@ -4,9 +4,9 @@ import com.mercadolibre.desafioquality.DAO.FlightDAO.Impl.FlightSeatsDAOImpl;
 import com.mercadolibre.desafioquality.DAO.HotelRoomDAO.Impl.BookingDaoImpl;
 import com.mercadolibre.desafioquality.DTO.AvailabilityHotelRoomDTOs.HotelDTO;
 import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsDTO;
-import com.mercadolibre.desafioquality.DTO.FlightSeatsDtos.FlightSeatsRequestDTO;
 import com.mercadolibre.desafioquality.DTO.PeopleDTO;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -49,7 +49,7 @@ public class Validator {
 
     public static boolean isValidButEmpty(Object ...args)
     {
-        return  args.length ==0;
+        return Arrays.stream(args).allMatch( param -> param ==null);
 
     }
 
